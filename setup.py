@@ -1,9 +1,13 @@
 #!/usr/bin/python3
 from setuptools import setup
 import binwb_cli
+import sys
 
 with open("README.md", "r", encoding = "utf-8") as file: readme = file.read()
 with open("requirements.txt", "r", encoding = "utf-8") as file: reqs = file.read().splitlines()
+
+if sys.platform == "win32": scripts = [ "scripts/binwb.cmd" ]
+else: scripts = [ "scripts/binwb" ]
 
 setup(
 	name = "binwb-cli",
@@ -27,5 +31,11 @@ setup(
 
 	url = "https://github.com/hexalinq/binwb-cli/",
 	packages = [ "binwb_cli" ],
-	scripts = [ "scripts/binwb" ],
+
+	scripts = scripts,
+	#entry_points = {
+	#	"console_scripts": [
+	#		"binwb = binwb_cli.main:main",
+	#	],
+	#},
 )
